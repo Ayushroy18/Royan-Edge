@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Prices | Royan Edge</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #crypto-section {
+            padding: 2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+        .coin {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .coin h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #005f73;
+        }
+        .coin canvas {
+            display: block;
+            width: 90% !important;
+            max-width: 1100px;
+            height: 450px !important;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <h1 class="logo">Royan Edge</h1>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section id="crypto-section">
+        <h2>Cryptocurrency Prices 🔴 Live</h2>
+        <p><strong>Prices displayed in USD</strong></p>
+        <p>1 USD = 86.4 INR</p>
+
+        <div class="coin">
+            <h3>Bitcoin (BTC) 🔴 Live</h3>
+            <canvas id="bitcoinChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Ethereum (ETH) 🔴 Live</h3>
+            <canvas id="ethereumChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Tether (USDT) 🔴 Live</h3>
+            <canvas id="tetherChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>XRP (Ripple) 🔴 Live</h3>
+            <canvas id="xrpChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Binance Coin (BNB) 🔴 Live</h3>
+            <canvas id="bnbChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>USDC (USD Coin) 🔴 Live</h3>
+            <canvas id="usdcChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Solana (SOL) 🔴 Live</h3>
+            <canvas id="solanaChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Dogecoin (DOGE) 🔴 Live</h3>
+            <canvas id="dogecoinChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>Cardano (ADA) 🔴 Live</h3>
+            <canvas id="cardanoChart"></canvas>
+        </div>
+
+        <div class="coin">
+            <h3>TRON (TRX) 🔴 Live</h3>
+            <canvas id="tronChart"></canvas>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Royan Edge. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Example coin data (manually entered data in USD)
+        const coinData = {
+            bitcoin:   { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [40000, 40200, 40400, 40600, 40800] },
+            ethereum:  { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [2500, 2550, 2600, 2650, 2700] },
+            tether:    { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [1, 1, 1, 1, 1] },
+            xrp:       { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [1, 1.01, 1.02, 1.03, 1.04] },
+            bnb:       { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [300, 305, 310, 315, 320] },
+            usdc:      { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [1, 1, 1, 1, 1] },
+            solana:    { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [150, 152, 154, 156, 158] },
+            dogecoin:  { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [0.3, 0.31, 0.32, 0.33, 0.34] },
+            cardano:   { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [1.2, 1.21, 1.22, 1.23, 1.24] },
+            tron:      { labels: ['10:00', '10:05', '10:10', '10:15', '10:20'], prices: [0.07, 0.071, 0.072, 0.073, 0.074] }
+        };
+
+        function createChart(id, data) {
+            const ctx = document.getElementById(id).getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Price (USD)',
+                        data: data.prices,
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Time' } },
+                        y: { title: { display: true, text: 'Price (USD)' } }
+                    }
+                }
+            });
+        }
+
+        // Initialize charts
+        Object.entries(coinData).forEach(([key, value]) => createChart(`${key}Chart`, value));
+    </script>
+</body>
+</html>
